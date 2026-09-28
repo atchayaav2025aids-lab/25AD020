@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RecipeBox - Personal Recipe & Meal Planner</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+        🍴 <span>RecipeBox</span>
+    </div>
+
+    <div class="user-info">
+        <span>Welcome</span>
+        <span class="user-icon">👤</span>
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN LAYOUT ================= -->
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <h3>MENU</h3>
+
+        <button onclick="showSection('dashboard')">
+            🏠 Dashboard
+        </button>
+
+        <button onclick="showSection('recipes')">
+            🍲 Recipes
+        </button>
+
+        <button onclick="showSection('ingredients')">
+            🥕 Ingredients
+        </button>
+
+        <button onclick="showSection('mealplans')">
+            📅 Meal Plans
+        </button>
+
+        <button onclick="showSection('users')">
+            👤 Users
+        </button>
+
+    </aside>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <main class="content">
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="page-section">
+
+            <div class="welcome-box">
+
+                <h1>Welcome to RecipeBox 👋</h1>
+
+                <p>
+                    Manage your recipes, ingredients and meal plans
+                    in one place.
+                </p>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon">🍲</div>
+                    <div>
+                        <h3>Recipes</h3>
+                        <p id="recipeCount">0</p>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon">🥕</div>
+                    <div>
+                        <h3>Ingredients</h3>
+                        <p id="ingredientCount">0</p>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div>
+                        <h3>Meal Plans</h3>
+                        <p id="mealPlanCount">0</p>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon">👤</div>
+                    <div>
+                        <h3>Users</h3>
+                        <p id="userCount">0</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- RECENT RECIPES -->
+
+            <div class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <h2>Recent Recipes</h2>
+
+                    <button class="primary-btn"
+                            onclick="showSection('recipes')">
+                        View All
+                    </button>
+
+                </div>
+
+                <div id="recentRecipes" class="card-container">
+
+                    <!-- Recipes will come from JavaScript -->
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= RECIPES ================= -->
+
+        <section id="recipes" class="page-section hidden">
+
+            <div class="section-heading">
+
+                <div>
+                    <h1>🍲 Recipes</h1>
+                    <p>Manage your personal recipes.</p>
+                </div>
+
+                <button class="primary-btn"
+                        onclick="openRecipeForm()">
+                    + Add Recipe
+                </button>
+
+            </div>
+
+
+            <!-- RECIPE FORM -->
+
+            <div id="recipeForm" class="form-box hidden">
+
+                <h2>Add Recipe</h2>
+
+                <input type="hidden" id="recipeId">
+
+                <input
+                        type="text"
+                        id="recipeName"
+                        placeholder="Recipe Name">
+
+                <textarea
+                        id="recipeIngredients"
+                        placeholder="Ingredients"></textarea>
+
+                <textarea
+                        id="recipeSteps"
+                        placeholder="Cooking Steps"></textarea>
+
+                <input
+                        type="number"
+                        id="recipePrepTime"
+                        placeholder="Preparation Time (minutes)">
+
+                <input
+                        type="text"
+                        id="recipeCuisine"
+                        placeholder="Cuisine">
+
+                <label>
+                    <input type="checkbox" id="recipeFavorite">
+                    Favorite
+                </label>
+
+                <div class="form-buttons">
+
+                    <button class="primary-btn"
+                            onclick="saveRecipe()">
+                        Save
+                    </button>
+
+                    <button class="secondary-btn"
+                            onclick="closeRecipeForm()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="recipeList" class="card-container">
+
+                <!-- Recipes will appear here -->
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= INGREDIENTS ================= -->
+
+        <section id="ingredients" class="page-section hidden">
+
+            <div class="section-heading">
+
+                <div>
+                    <h1>🥕 Ingredients</h1>
+                    <p>Manage your ingredients and quantities.</p>
+                </div>
+
+                <button class="primary-btn"
+                        onclick="openIngredientForm()">
+                    + Add Ingredient
+                </button>
+
+            </div>
+
+
+            <div id="ingredientForm" class="form-box hidden">
+
+                <h2>Add Ingredient</h2>
+
+                <input type="hidden" id="ingredientId">
+
+                <input
+                        type="text"
+                        id="ingredientName"
+                        placeholder="Ingredient Name">
+
+                <input
+                        type="text"
+                        id="ingredientQuantity"
+                        placeholder="Quantity">
+
+                <div class="form-buttons">
+
+                    <button class="primary-btn"
+                            onclick="saveIngredient()">
+                        Save
+                    </button>
+
+                    <button class="secondary-btn"
+                            onclick="closeIngredientForm()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="ingredientList" class="card-container">
+
+                <!-- Ingredients will appear here -->
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= MEAL PLANS ================= -->
+
+        <section id="mealplans" class="page-section hidden">
+
+            <div class="section-heading">
+
+                <div>
+                    <h1>📅 Meal Plans</h1>
+                    <p>Plan your meals using your recipes.</p>
+                </div>
+
+                <button class="primary-btn"
+                        onclick="openMealPlanForm()">
+                    + Add Meal Plan
+                </button>
+
+            </div>
+
+
+            <div id="mealPlanForm" class="form-box hidden">
+
+                <h2>Add Meal Plan</h2>
+
+                <input
+                        type="hidden"
+                        id="mealPlanId">
+
+                <input
+                        type="date"
+                        id="mealPlanDate">
+
+                <select id="mealPlanType">
+
+                    <option value="">Select Meal Type</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+
+                </select>
+
+                <input
+                        type="number"
+                        id="mealPlanRecipeId"
+                        placeholder="Recipe ID">
+
+                <div class="form-buttons">
+
+                    <button class="primary-btn"
+                            onclick="saveMealPlan()">
+                        Save
+                    </button>
+
+                    <button class="secondary-btn"
+                            onclick="closeMealPlanForm()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="mealPlanList" class="card-container">
+
+                <!-- Meal plans will appear here -->
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= USERS ================= -->
+
+        <section id="users" class="page-section hidden">
+
+            <div class="section-heading">
+
+                <div>
+                    <h1>👤 Users</h1>
+                    <p>Manage RecipeBox users.</p>
+                </div>
+
+                <button class="primary-btn"
+                        onclick="openUserForm()">
+                    + Add User
+                </button>
+
+            </div>
+
+
+            <div id="userForm" class="form-box hidden">
+
+                <h2>Add User</h2>
+
+                <input
+                        type="hidden"
+                        id="userId">
+
+                <input
+                        type="text"
+                        id="userName"
+                        placeholder="User Name">
+
+                <div class="form-buttons">
+
+                    <button class="primary-btn"
+                            onclick="saveUser()">
+                        Save
+                    </button>
+
+                    <button class="secondary-btn"
+                            onclick="closeUserForm()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="userList" class="card-container">
+
+                <!-- Users will appear here -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
